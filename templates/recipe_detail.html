@@ -1,0 +1,22 @@
+<{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ recipe.title }}</h2>
+    <p><strong>Автор:</strong> {{ recipe.author }}</p>
+    <p><strong>Время приготовления:</strong> {{ recipe.cooking_time }} мин.</p>
+    <p><strong>Ингредиенты:</strong> {{ recipe.ingredients.all|join:", " }}</p>
+    <p><strong>Инструкции:</strong> {{ recipe.instructions }}</p>
+{% if recipe.image %}
+    <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}" style="max-width: 300px; height: auto;"/>><br>
+
+
+{% endif %}
+
+{% if user == recipe.author or user.is_staff %}
+    <a href="{% url 'recipe_edit' recipe.slug %}">Редактировать рецепт</a><br>
+{% endif %}
+
+
+<a href="{% url 'index' %}">Назад на главную</a><br>
+<a href="{% url 'recipe_search' %}">Вернуться к поиску рецептов</a><br>
+{% endblock %}

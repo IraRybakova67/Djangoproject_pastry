@@ -1,0 +1,26 @@
+{{% extends 'base.html' %}
+
+{% block content %}
+<h2>Рецепты категории {{ category.name_category }}</h2>
+
+
+<ul>
+    {% for recipe in recipes %}
+        <li>
+            <h3>{{ recipe.title }}</h3>
+            <p><strong>Автор:</strong> {{ recipe.author }}</p>
+            <p><strong>Время приготовления:</strong> {{ recipe.cooking_time }} мин.</p>
+            <p><strong>Ингредиенты:</strong> {{ recipe.ingredients.all|join:", " }}</p>
+            <p><strong>Инструкции:</strong> {{ recipe.instructions }}</p>
+            {% if recipe.image %}
+                <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}" style="max-width: 300px; height: auto;" />
+            {% endif %}
+        </li>
+    {% empty %}
+        <p>В этой категории пока нет рецептов.</p>
+    {% endfor %}
+</ul>
+<a href="{% url 'category_list' %}">Назад к категориям</a> <br>
+<a href="{% url 'index' %}">Назад на главную</a>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+<{% extends 'base.html' %}
+
+{% block content %}
+<h2>Вход</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Войти</button>
+    </form>
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+
+<a href="{% url 'index' %}">Назад на главную</a>
+{% endblock %}

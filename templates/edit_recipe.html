@@ -1,0 +1,19 @@
+<{% extends 'base.html' %}
+
+{% block content %}
+<h2>Редактировать рецепт</h2>
+
+<form method="post" enctype="multipart/form-data">
+{% csrf_token %}
+{{ form.as_p }}
+<button type="submit">Сохранить</button>
+
+</form>
+
+<a href="{% url 'index' %}">Назад на главную</a><br>
+<a href="{% url 'add_category' %}">Добавить категорию</a><br>
+<a href="{% url 'add_ingredient' %}">Добавить ингредиент</a><br>
+<a href="{% url 'recipe_search' %}">Поиск рецепта</a><br>
+
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Поиск рецептов по ингредиенту</h2>
+
+<form method="GET" action="{% url 'recipe_search_by_ingredient' %}">
+    <input type="text" name="q" placeholder="Введите название ингредиента" />
+    <button type="submit">Искать</button>
+</form>
+
+{% if query %}
+    <h3>Результаты поиска для: "{{ query }}"</h3>
+    {% if recipes %}
+        <ul>
+            {% for recipe in recipes %}
+                <li>
+                    <a href="{% url 'recipe_detail' recipe.slug %}">{{ recipe.title }}</a> (Автор: {{ recipe.author }})
+                </li>
+            {% endfor %}
+        </ul>
+
+    {% else %}
+        <p>Нет рецептов, соответствующих Вашему запросу.</p>
+    {% endif %}
+{% endif %}
+
+<a href="{% url 'index' %}">Назад на главную</a>
+{% endblock %}

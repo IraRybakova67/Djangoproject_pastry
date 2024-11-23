@@ -1,0 +1,15 @@
+{{% extends 'base.html' %}
+
+{% block content %}
+<h2>Список категорий</h2>
+
+<ul>
+    {% for category in categories %}
+        <li>
+            <a href="{% url 'recipes_by_category' category.pk %}">{{ category.name_category }}</a>
+
+        </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'index' %}">Назад на главную</a>
+{% endblock %}

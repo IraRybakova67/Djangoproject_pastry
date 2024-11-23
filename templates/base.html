@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<h1>Сайт Рыбаковой Ирины</h1>
+<body>
+{% block content %}
+Сайт с кулинарными рецептами.<br>
+
+Делимся своими рецептами и учимся у других!
+
+<div>{% if user.is_authenticated %}
+    <p>Привет, {{ user.username }}!</p>
+    <a href="{% url 'logout' %}">Выйти</a>
+{% else %}
+    <a href="{% url 'login' %}">Войти</a>
+{% endif %}</div>
+
+<nav>
+        <ul>
+            <li><a href="{% url 'register' %}">Регистрация</a></li>
+            <li><a href="{% url 'add_recipe' %}">Поделиться рецептом</a></li>
+            <li><a href="{% url 'recipe_search' %}">Поиск рецепта</a></li>
+            <li><a href="{% url 'category_list' %}">Поиск рецептов по категории</a></li>
+            <li><a href="{% url 'recipe_search_by_ingredient' %}">Поиск рецептов по ингредиенту</a></li>
+
+
+        </ul>
+    </nav>
+
+{% endblock %}
+</body>
+</html>
