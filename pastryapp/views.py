@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from django.core.files.storage import FileSystemStorage
+from django.utils.text import slugify
 
 logger = logging.getLogger(__name__)
 
@@ -97,6 +98,7 @@ def add_recipe(request):
         form = RecipeForm(request.POST)
         if form.is_valid():
             recipe = form.save(commit=False)
+            recipe.slug = slugify(recipe.title)
             recipe.author = request.user  # Установка автора рецепта
             recipe.save()  # Сохраняем рецепт, который включает также отношения many-to-many
             form.save_m2m()  # Сохраняем много ко многим
