@@ -100,6 +100,8 @@ def add_recipe(request):
             recipe = form.save(commit=False)
             recipe.slug = slugify(recipe.title)
             recipe.author = request.user  # Установка автора рецепта
+            if not recipe.slug or recipe.slug == "":
+                recipe.slug = slugify(recipe.title)
             recipe.save()  # Сохраняем рецепт, который включает также отношения many-to-many
             form.save_m2m()  # Сохраняем много ко многим
             logger.info(f'Создан рецепт: {form.cleaned_data=}.')

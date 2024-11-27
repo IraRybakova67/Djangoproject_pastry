@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
+from unidecode import unidecode
 
 
 class Ingredient(models.Model):
@@ -33,6 +34,6 @@ class Recipe(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title)
+            self.slug = slugify(unidecode(self.title))
         super().save(*args, **kwargs)
 
